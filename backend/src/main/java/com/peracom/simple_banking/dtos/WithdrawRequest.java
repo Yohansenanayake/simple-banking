@@ -1,0 +1,15 @@
+package com.peracom.simple_banking.dtos;
+
+import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class WithdrawRequest {
+    private Long accountId;
+    private BigDecimal amount;
+    private String description;
+}
