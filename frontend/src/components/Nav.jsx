@@ -9,7 +9,10 @@ export default function Nav({ user, onLogout, onChangeView }) {
             <button onClick={onLogout}>Sign Out</button>
           </>
         ) : (
-          <button onClick={() => onChangeView('login')}>Sign In</button>
+          <>
+            <button onClick={() => onChangeView('login')}>Login</button>
+            <button onClick={() => onChangeView('register')}>Register</button>
+          </>
         )}
       </nav>
     </header>

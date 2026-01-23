@@ -51,6 +51,9 @@ export default function Login({ onLogin, onSwitch }) {
           {isLoading ? 'Signing In...' : 'Sign In'}
         </button>
       </form>
+      <div style={{marginTop:8}}>
+        <small>Don't have an account? <button onClick={onSwitch}>Register</button></small>
+      </div>
       {error && <div className="error">{error}</div>}
       <p style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>
         Need an account? 
