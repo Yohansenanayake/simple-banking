@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Login from './components/Login'
+import Register from './components/Register'
 import Accounts from './components/Accounts'
 import AccountDetail from './components/AccountDetail'
 import Nav from './components/Nav'
@@ -35,8 +36,12 @@ function App() {
     <div className="app">
       <Nav user={user} onLogout={handleLogout} onChangeView={setView} />
       <main>
-        {!user && view !== 'register' && (
+        {!user && view === 'login' && (
           <Login onLogin={handleLogin} onSwitch={() => setView('register')} />
+        )}
+
+        {!user && view === 'register' && (
+          <Register onLogin={handleLogin} onSwitch={() => setView('login')} />
         )}
 
         {user && view === 'accounts' && (
