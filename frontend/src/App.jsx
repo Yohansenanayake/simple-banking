@@ -13,7 +13,11 @@ function App() {
 
   useEffect(() => {
     const stored = localStorage.getItem('sb_user')
-    if (stored) setUser(JSON.parse(stored))
+    if (stored) {
+      setUser(JSON.parse(stored))
+    } else {
+      setView('login')
+    }
   }, [])
 
   function handleLogin(u) {
