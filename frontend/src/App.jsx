@@ -1,34 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
+import Login from './components/Login'
+import Accounts from './components/Accounts'
+import AccountDetail from './components/AccountDetail'
+import Nav from './components/Nav'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState(null)
+  const [view, setView] = useState('accounts')
+  const [selectedAccount, setSelectedAccount] = useState(null)
+
+  useEffect(() => {
+    const stored = localStorage.getItem('sb_user')
+    if (stored) setUser(JSON.parse(stored))
+  }, [])
+
+  function handleLogin(u) {
+    setUser(u)
+    localStorage.setItem('sb_user', JSON.stringify(u))
+    setView('accounts')
+  }
+
+  function handleLogout() {
+    setUser(null)
+    localStorage.removeItem('sb_user')
+    setView('login')
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app">
+      <Nav user={user} onLogout={handleLogout} onChangeView={setView} />
+      <main>
+        {!user && view !== 'register' && (
+          <Login onLogin={handleLogin} onSwitch={() => setView('register')} />
+        )}
+
+        {user && view === 'accounts' && (
+          <Accounts onOpenAccount={(a) => { setSelectedAccount(a); setView('account') }} user={user} />
+        )}
+
+        {user && view === 'account' && selectedAccount && (
+          <AccountDetail account={selectedAccount} onBack={() => setView('accounts')} />
+        )}
+      </main>
+    </div>
   )
 }
 
