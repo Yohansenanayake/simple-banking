@@ -25,13 +25,11 @@ public class AccountService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User id is required to create an account.");
         }
 
-        User user =
-                userRepository
-                        .findById(account.getUser().getId())
-                        .orElseThrow(
-                                () ->
-                                        new ResponseStatusException(
-                                                HttpStatus.NOT_FOUND, "User not found."));
+        User user = userRepository
+                .findById(account.getUser().getId())
+                .orElseThrow(
+                        () -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND, "User not found."));
 
         account.setUser(user);
         account.setAccountNumber(generateAccountNumber());
@@ -57,7 +55,7 @@ public class AccountService {
     }
 
     public List<Account> getAccountsByUser(Long userId) {
-        return accountRepository.findByUserId(userId);
+        return accountRepository.findByUser_Id(userId);
     }
 
     private String generateAccountNumber() {
