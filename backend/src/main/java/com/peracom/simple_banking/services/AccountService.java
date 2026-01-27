@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
-public class AccountService {
+public class AccountService implements IAccountService {
 
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
@@ -56,6 +56,10 @@ public class AccountService {
 
     public List<Account> getAccountsByUser(Long userId) {
         return accountRepository.findByUser_Id(userId);
+    }
+
+    public List<Account> getAllAccounts() {
+        return accountRepository.findAll();
     }
 
     private String generateAccountNumber() {

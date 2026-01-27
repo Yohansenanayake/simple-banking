@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TransactionService {
+public class TransactionService implements ITransactionService {
 
     private final TransactionRepository transactionRepository;
 

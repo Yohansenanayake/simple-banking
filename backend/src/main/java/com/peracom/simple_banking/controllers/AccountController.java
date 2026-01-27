@@ -1,7 +1,7 @@
 package com.peracom.simple_banking.controllers;
 
 import com.peracom.simple_banking.model.Account;
-import com.peracom.simple_banking.services.AccountService;
+import com.peracom.simple_banking.services.IAccountService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AccountController {
 
-    private final AccountService accountService;
+    private final IAccountService accountService;
 
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
@@ -27,6 +27,11 @@ public class AccountController {
     @GetMapping("/{id}")
     public ResponseEntity<Account> getAccount(@PathVariable Long id) {
         return ResponseEntity.ok(accountService.getAccount(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Account>> getAllAccounts() {
+        return ResponseEntity.ok(accountService.getAllAccounts());
     }
 
     @GetMapping("/user/{userId}")

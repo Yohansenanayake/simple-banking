@@ -3,7 +3,7 @@ package com.peracom.simple_banking.controllers;
 import com.peracom.simple_banking.dtos.LoginRequest;
 import com.peracom.simple_banking.dtos.RegisterRequest;
 import com.peracom.simple_banking.model.User;
-import com.peracom.simple_banking.services.UserService;
+import com.peracom.simple_banking.services.IUserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterRequest request) {

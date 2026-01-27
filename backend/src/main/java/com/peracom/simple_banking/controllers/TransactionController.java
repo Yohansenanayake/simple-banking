@@ -4,7 +4,7 @@ import com.peracom.simple_banking.dtos.DepositRequest;
 import com.peracom.simple_banking.dtos.TransferRequest;
 import com.peracom.simple_banking.dtos.WithdrawRequest;
 import com.peracom.simple_banking.model.Transaction;
-import com.peracom.simple_banking.services.TransactionService;
+import com.peracom.simple_banking.services.ITransactionService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TransactionController {
 
-    private final TransactionService transactionService;
+    private final ITransactionService transactionService;
 
     @PostMapping("/deposit")
     public ResponseEntity<Transaction> deposit(@RequestBody DepositRequest request) {

@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements IUserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -42,13 +42,11 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email and password are required.");
         }
 
-        User user =
-                userRepository
-                        .findByEmail(request.getEmail().trim().toLowerCase())
-                        .orElseThrow(
-                                () ->
-                                        new ResponseStatusException(
-                                                HttpStatus.UNAUTHORIZED, "Invalid email or password."));
+        User user = userRepository
+                .findByEmail(request.getEmail().trim().toLowerCase())
+                .orElseThrow(
+                        () -> new ResponseStatusException(
+                                HttpStatus.UNAUTHORIZED, "Invalid email or password."));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password.");
