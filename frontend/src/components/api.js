@@ -17,10 +17,11 @@ export function login(payload) { return request('/users/login', { method: 'POST'
 
 export function getAccountsByUser(userId) { return request(`/accounts/user/${userId}`) }
 export function getAccount(id) { return request(`/accounts/${id}`) }
+export function createAccount(payload) { return request('/accounts', { method: 'POST', body: JSON.stringify(payload) }) }
 
 export function deposit(payload) { return request('/transactions/deposit', { method: 'POST', body: JSON.stringify(payload) }) }
 export function withdraw(payload) { return request('/transactions/withdraw', { method: 'POST', body: JSON.stringify(payload) }) }
 export function transfer(payload) { return request('/transactions/transfer', { method: 'POST', body: JSON.stringify(payload) }) }
 export function getTransactionsForAccount(accountId) { return request(`/transactions/account/${accountId}`) }
 
-export default { register, login, getAccountsByUser, getAccount, deposit, withdraw, transfer, getTransactionsForAccount }
+export default { register, login, getAccountsByUser, getAccount, createAccount, deposit, withdraw, transfer, getTransactionsForAccount }
